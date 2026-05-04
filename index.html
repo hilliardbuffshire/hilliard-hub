@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jayden's Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Noto+Serif+KR:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --gold-dim: rgba(201,168,76,0.15);
+    --bg: #0d0d0f;
+    --bg2: #13131a;
+    --bg3: #1a1a26;
+    --text: #f0ead8;
+    --text-dim: #a09880;
+    --border: rgba(201,168,76,0.2);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    font-family: 'EB Garamond', 'Noto Serif KR', Georgia, serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── 배경 그라디언트 ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 40% at 50% 0%, rgba(201,168,76,0.06) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 80% 80%, rgba(80,60,150,0.05) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  /* ── 헤더 ── */
+  header {
+    text-align: center;
+    padding: 64px 24px 48px;
+    position: relative;
+  }
+
+  /* ── 십자가 ── */
+  .cross-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 32px;
+  }
+
+  .cross-svg {
+    filter: drop-shadow(0 0 18px rgba(201,168,76,0.5));
+    animation: glow 3s ease-in-out infinite alternate;
+  }
+
+  @keyframes glow {
+    from { filter: drop-shadow(0 0 12px rgba(201,168,76,0.4)); }
+    to   { filter: drop-shadow(0 0 28px rgba(201,168,76,0.75)); }
+  }
+
+  .brand {
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    color: var(--gold);
+    margin-bottom: 0;
+    font-family: 'Noto Serif KR', 'EB Garamond', serif;
+    font-weight: 300;
+    line-height: 1.8;
+  }
+
+  .brand strong {
+    font-size: 15px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .subtitle {
+    font-size: 18px;
+    color: var(--text-dim);
+    letter-spacing: 0.3px;
+    max-width: 460px;
+    margin: 0 auto;
+    line-height: 1.7;
+    font-family: 'Noto Serif KR', 'EB Garamond', serif;
+    font-weight: 300;
+  }
+
+  /* ── 구분선 ── */
+  .divider {
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 32px auto;
+  }
+
+  /* ── 카드 그리드 ── */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+
+  /* ── 카드 ── */
+  .card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 36px 32px;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    cursor: pointer;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--gold-dim) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: inherit;
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+    border-color: var(--gold);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(201,168,76,0.15);
+  }
+
+  .card:hover::before { opacity: 1; }
+
+  .card-icon {
+    font-size: 40px;
+    line-height: 1;
+  }
+
+  .card-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-family: 'Cormorant Garamond', 'EB Garamond', serif;
+    font-weight: 400;
+  }
+
+  .card-tag-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--gold);
+  }
+
+  .card-title {
+    font-size: 27px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    line-height: 1.25;
+    color: var(--text);
+    font-family: 'Noto Serif KR', Georgia, serif;
+    font-style: normal;
+  }
+
+  .card-desc {
+    font-size: 16px;
+    color: var(--text-dim);
+    line-height: 1.7;
+    flex: 1;
+    font-family: 'Noto Serif KR', 'EB Garamond', serif;
+    font-weight: 300;
+  }
+
+  .card-arrow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 15px;
+    color: var(--gold);
+    letter-spacing: 0.5px;
+    margin-top: 8px;
+    transition: gap 0.2s ease;
+    font-family: 'EB Garamond', serif;
+  }
+
+  .card:hover .card-arrow { gap: 14px; }
+
+  .card-arrow svg {
+    transition: transform 0.2s ease;
+  }
+
+  .card:hover .card-arrow svg { transform: translateX(3px); }
+
+  /* 카드 컬러 라인 */
+  .card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    border-radius: 16px 16px 0 0;
+    background: linear-gradient(90deg, transparent, var(--card-accent, var(--gold)), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .card:hover::after { opacity: 1; }
+
+  /* ── 푸터 ── */
+  footer {
+    text-align: center;
+    padding: 32px 24px;
+    border-top: 1px solid var(--border);
+    color: var(--text-dim);
+    font-size: 13px;
+    letter-spacing: 0.5px;
+  }
+
+  footer .cross-small {
+    display: inline-block;
+    color: var(--gold);
+    margin: 0 6px;
+    font-size: 16px;
+  }
+
+  /* ── 반응형 ── */
+  @media (max-width: 600px) {
+    header { padding: 48px 20px 36px; }
+    .grid { padding: 0 16px 60px; gap: 16px; }
+    .card { padding: 28px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <!-- 십자가 -->
+  <div class="cross-wrap">
+    <svg class="cross-svg" width="72" height="88" viewBox="0 0 72 88" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- 수직 기둥 -->
+      <rect x="29" y="0" width="14" height="88" rx="3" fill="url(#crossGradV)"/>
+      <!-- 수평 기둥 -->
+      <rect x="0" y="22" width="72" height="14" rx="3" fill="url(#crossGradH)"/>
+      <!-- 광채 -->
+      <ellipse cx="36" cy="29" rx="20" ry="14" fill="rgba(201,168,76,0.08)"/>
+      <defs>
+        <linearGradient id="crossGradV" x1="36" y1="0" x2="36" y2="88" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#e8c97a"/>
+          <stop offset="45%" stop-color="#c9a84c"/>
+          <stop offset="100%" stop-color="#8a6f2e"/>
+        </linearGradient>
+        <linearGradient id="crossGradH" x1="0" y1="29" x2="72" y2="29" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#8a6f2e"/>
+          <stop offset="50%" stop-color="#e8c97a"/>
+          <stop offset="100%" stop-color="#8a6f2e"/>
+        </linearGradient>
+      </defs>
+    </svg>
+  </div>
+
+  <p class="brand">주님의 은혜로 만들어가는<br><strong>Hilliard Buffshire</strong><br>통합 플랫폼</p>
+</header>
+
+<div class="divider"></div>
+
+<!-- 프로젝트 카드 그리드 -->
+<main class="grid">
+
+  <!-- 말씀 노트 -->
+  <a class="card" href="https://jaydens-bible-notes.onrender.com/" target="_blank" rel="noopener" style="--card-accent:#c9a84c">
+    <div class="card-icon">✝️</div>
+    <div>
+      <p class="card-tag"><span class="card-tag-dot"></span>신앙 &amp; 묵상</p>
+      <h2 class="card-title">말씀 노트</h2>
+    </div>
+    <p class="card-desc">설교와 성경공부 노트를 기록하고 관리합니다. 성경 구절 인용, 교차 참조, AI 요약, 성경 연결 지도를 제공합니다.</p>
+    <div class="card-arrow">
+      열기
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M3 8h10M9 4l4 4-4 4" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </a>
+
+  <!-- 재정 대시보드 -->
+  <a class="card" href="https://hilliardbuffshire.github.io/Personal-Finance-Dashboard" target="_blank" rel="noopener" style="--card-accent:#4caf7a">
+    <div class="card-icon">💰</div>
+    <div>
+      <p class="card-tag"><span class="card-tag-dot" style="background:#4caf7a"></span>재정 관리</p>
+      <h2 class="card-title">HB Finance<br>Dashboard</h2>
+    </div>
+    <p class="card-desc">수입·지출·부채를 한눈에 파악합니다. 자동 스케줄링, 투자 포트폴리오, AI 재정 조언까지 제공하는 개인 재정 플랫폼입니다.</p>
+    <div class="card-arrow" style="color:#4caf7a">
+      열기
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M3 8h10M9 4l4 4-4 4" stroke="#4caf7a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </a>
+
+  <!-- 할일 플래너 -->
+  <a class="card" href="https://hilliardbuffshire.github.io/hilliard-todo/" target="_blank" rel="noopener" style="--card-accent:#6b8fce">
+    <div class="card-icon">📋</div>
+    <div>
+      <p class="card-tag"><span class="card-tag-dot" style="background:#6b8fce"></span>생산성 &amp; 계획</p>
+      <h2 class="card-title">Task Planner</h2>
+    </div>
+    <p class="card-desc">할일·목표·아이디어를 체계적으로 관리합니다. 달력, 반복 일정, 마인드맵, 동기부여 헤더까지 갖춘 올인원 플래너입니다.</p>
+    <div class="card-arrow" style="color:#6b8fce">
+      열기
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M3 8h10M9 4l4 4-4 4" stroke="#6b8fce" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </a>
+
+  <!-- 가치 투자 -->
+  <a class="card" href="https://hilliardbuffshire.onrender.com/hilliard-buffshire-dashboard.html" target="_blank" rel="noopener" style="--card-accent:#ce8f6b">
+    <div class="card-icon">📈</div>
+    <div>
+      <p class="card-tag"><span class="card-tag-dot" style="background:#ce8f6b"></span>투자 분석</p>
+      <h2 class="card-title">Investment<br>Dashboard</h2>
+    </div>
+    <p class="card-desc">DCF 내재가치와 Composite 스코어로 종목을 분석합니다. Buffett·Ackman 방식의 가치투자 신호와 워치리스트를 관리합니다.</p>
+    <div class="card-arrow" style="color:#ce8f6b">
+      열기
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M3 8h10M9 4l4 4-4 4" stroke="#ce8f6b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </a>
+
+</main>
+
+<footer>
+  <p>
+    Made by Jayden
+    <span class="cross-small">✝</span>
+    Hilliard Buffshire Platform
+  </p>
+</footer>
+
+</body>
+</html>
