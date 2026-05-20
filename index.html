@@ -105,9 +105,9 @@
   /* ── 카드 그리드 ── */
   .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(4, 1fr);
     gap: 24px;
-    max-width: 1100px;
+    max-width: 1400px;
     margin: 0 auto;
     padding: 0 24px 80px;
   }
@@ -243,9 +243,17 @@
   }
 
   /* ── 반응형 ── */
-  @media (max-width: 600px) {
+  @media (max-width: 1100px) {
+    .grid { grid-template-columns: repeat(3, 1fr); max-width: 1100px; }
+  }
+
+  @media (max-width: 760px) {
+    .grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 500px) {
     header { padding: 48px 20px 36px; }
-    .grid { padding: 0 16px 60px; gap: 16px; }
+    .grid { grid-template-columns: 1fr; padding: 0 16px 60px; gap: 16px; }
     .card { padding: 28px 24px; }
   }
 </style>
@@ -388,7 +396,7 @@
     <div class="card-icon">⚖️</div>
     <div>
       <p class="card-tag"><span class="card-tag-dot" style="background:#5fa8d3"></span>법률 소송</p>
-      <h2 class="card-title">법률 문서<br>플랫폼</h2>
+      <h2 class="card-title">소송 자료<br>플랫폼</h2>
     </div>
     <p class="card-desc">소송 문서를 열람·다운로드합니다. AI가 문서를 분석하고 질문에 답변합니다. 사건번호 2023가단62004, 2025가단4471.</p>
     <div class="card-arrow" style="color:#5fa8d3">
